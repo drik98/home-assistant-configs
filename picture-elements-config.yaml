@@ -1,0 +1,89 @@
+title: Wohnungsübersicht
+type: picture-elements
+elements:
+  - type: state-icon
+    entity: light.kuche
+    style:
+      top: 28%
+      left: 85%
+  - type: state-icon
+    entity: sensor.heizkorperthermostat_kuche_links_temperature
+    style:
+      top: 16%
+      left: 80%
+  - type: state-label
+    entity: sensor.heizkorperthermostat_kuche_links_temperature
+    style:
+      top: 16%
+      left: 86%
+      font-size: 0.8rem
+      color: black
+  - type: state-icon
+    entity: light.flur
+    style:
+      top: 29%
+      left: 56%
+  - type: state-icon
+    entity: light.wohnzimmer
+    style:
+      top: 60%
+      left: 74%
+  - type: state-icon
+    entity: sensor.heizkorperthermostat_wohnzimmer_temperature
+    style:
+      top: 60%
+      left: 82%
+  - type: state-label
+    entity: sensor.heizkorperthermostat_wohnzimmer_temperature
+    style:
+      top: 60%
+      left: 88%
+      font-size: 0.8rem
+      color: black
+  - type: state-icon
+    entity: light.arbeitszimmer
+    style:
+      top: 64%
+      left: 10%
+  - type: state-icon
+    entity: sensor.heizkorperthermostat_arbeitszimmer_temperature
+    style:
+      top: 64%
+      left: 16%
+  - type: state-label
+    entity: sensor.heizkorperthermostat_arbeitszimmer_temperature
+    style:
+      top: 64%
+      left: 22%
+      font-size: 0.8rem
+      color: black
+  - type: state-icon
+    entity: sensor.heizkorperthermostat_bad_temperature
+    style:
+      top: 30%
+      left: 36%
+  - type: state-label
+    entity: sensor.heizkorperthermostat_bad_temperature
+    style:
+      top: 30%
+      left: 42%
+      font-size: 0.8rem
+      color: black
+  - type: state-icon
+    entity: light.schlafzimmer
+    style:
+      top: 56%
+      left: 39%
+  - type: state-icon
+    entity: sensor.heizkorperthermostat_schlafzimmer_temperature
+    style:
+      top: 56%
+      left: 46%
+  - type: state-label
+    entity: sensor.heizkorperthermostat_schlafzimmer_temperature
+    style:
+      top: 56%
+      left: 52%
+      font-size: 0.8rem
+      color: black
+image: /local/floorplan_color.png
