@@ -24,7 +24,7 @@ services:
     volumes:
       - /opt/deconz:/opt/deCONZ
     devices:
-      - /dev/ttyUSB0
+      - /dev/ttyACM0
     environment:
       - DECONZ_WEB_PORT=80
       - DECONZ_WS_PORT=443
