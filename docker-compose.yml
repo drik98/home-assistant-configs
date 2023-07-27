@@ -13,6 +13,8 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
+    networks:
+      - homeassistant
 
   deconz:
     image: deconzcommunity/deconz
@@ -39,9 +41,10 @@ services:
     image: ghcr.io/milgradesec/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
+    networks:
+      - homeassistant
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
 
 networks:
-   default:
-      driver: bridge
+  homeassistant:
