@@ -42,7 +42,7 @@ services:
     environment:
       - "EXTERNAL_HOSTNAME=ha.smtz.dev"
 
-networks:
-  default:
-    external:
-      name: homeassistant
+# networks:
+#   default:
+#     external:
+#       name: homeassistant
