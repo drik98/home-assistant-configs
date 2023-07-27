@@ -33,3 +33,16 @@ services:
       - DEBUG_ZCL=0
       - DEBUG_ZDP=0
       - DEBUG_OTA=0
+
+  tunnel:
+    container_name: cloudflared-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - "EXTERNAL_HOSTNAME=ha.smtz.dev"
+
+networks:
+  default:
+    external:
+      name: homeassistant
