@@ -9,3 +9,9 @@ frontend:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+# used for the local tunnel as described in https://github.com/brenner-tobias/addon-cloudflared/blob/af397fbd4e053da4a6bdab25109eb1de4aec153e/cloudflared/DOCS.md#configurationyaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24
