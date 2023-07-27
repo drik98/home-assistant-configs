@@ -43,6 +43,5 @@ services:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
 
 networks:
-  default:
-    external:
-      name: homeassistant
+   default:
+      driver: bridge
