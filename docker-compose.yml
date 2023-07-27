@@ -42,7 +42,7 @@ services:
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
 
-# networks:
-#   default:
-#     external:
-#       name: homeassistant
+networks:
+  default:
+    external:
+      name: homeassistant
