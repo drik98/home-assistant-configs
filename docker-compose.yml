@@ -40,7 +40,7 @@ services:
     restart: unless-stopped
     command: tunnel run
     environment:
-      - "TUNNEL_NAME=${CLOUDFLARE_TUNNEL_TOKEN}"
+      - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
 
 # networks:
 #   default:
