@@ -39,7 +39,13 @@ services:
     image: ghcr.io/milgradesec/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
-    network_mode: host
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
 
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.108.0.1/16 
