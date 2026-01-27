@@ -1,13 +1,11 @@
-homeassistant: true
-
+homeassistant:
+  enabled: true
 mqtt:
   server: mqtt://mosquitto:1883
-
 serial:
-  port: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE3020614-if00
+  port: /dev/ttyACM0
   adapter: deconz
-
 frontend:
+  enabled: true
   port: 8080
-
-permit_join: false
+version: 4
