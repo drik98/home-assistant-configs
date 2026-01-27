@@ -12,6 +12,17 @@ ssh hendrik@smarthome-pi.local
 
 Note that the user here is `hendrik` and the hostname is `raspberrypi` this was configured when setting up the raspbi using [this guide](https://www.tim-kleyersburg.de/articles/home-assistant-with-docker-2022/). The password for `hendrik` should be available through 1password.
 
+### Connect to the services Frontends
+
+As configured in the docker-compose file we expose the ports of some services such as home-assistant.
+In order to access these frontends, run
+
+```
+ssh -L 8080:127.0.0.1:8080 -L 8123:127.0.0.1:8123 hendrik@smarthome-pi
+```
+
+And you can access the frontends via localhost in your browser.
+
 ## Additional Configurations
 
 The docker-compose.yml expects some environment variables to be set in order to work. This can be achieved by
