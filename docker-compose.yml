@@ -37,26 +37,6 @@ services:
     environment:
       - TZ=Europe/Berlin
 
-  deconz:
-    image: deconzcommunity/deconz:latest
-    container_name: deconz
-    restart: unless-stopped
-    network_mode: host
-    privileged: true
-    devices:
-      - /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE3020614-if00:/dev/ttyACM0
-    environment:
-      - DECONZ_WEB_PORT=8081    # Use a different port than Z2M
-      - DECONZ_WS_PORT=8082
-      - DEBUG_INFO=1
-      - DEBUG_APS=0
-      - DEBUG_ZCL=0
-      - DEBUG_ZDP=0
-      - DEBUG_OTA=0
-    volumes:
-      - ./deconz:/root/.local/share/dresden-elektronik/deCONZ
-      - /etc/localtime:/etc/localtime:ro
-
   cloudflared:
     container_name: cloudflared
     # image: ghcr.io/milgradesec/cloudflared:2025.1.1
