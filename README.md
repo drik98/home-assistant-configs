@@ -7,7 +7,7 @@ This repository contains configs for my raspberry pi which runs home assistant a
 Connect to the raspbi via ssh:
 
 ```bash
-ssh hendrik@raspberrypi.local
+ssh hendrik@smarthome-pi.local
 ```
 
 Note that the user here is `hendrik` and the hostname is `raspberrypi` this was configured when setting up the raspbi using [this guide](https://www.tim-kleyersburg.de/articles/home-assistant-with-docker-2022/). The password for `hendrik` should be available through 1password.
@@ -18,3 +18,120 @@ The docker-compose.yml expects some environment variables to be set in order to 
 creating an `.env`-file in the root of this repository. The necessary variables are:
 
 - `CLOUDFLARE_TUNNEL_TOKEN`: The token created on cloudflare
+
+## Update Strategy
+
+This system runs:
+
+- Infrastructure services via **Docker Compose**
+- The base operating system via **Linux packages (APT)**
+
+Both layers must be updated regularly to receive:
+
+- Security patches
+- Bug fixes
+- Compatibility updates
+
+> **Recommended cadence:** roughly **once per month** or when security updates are announced.
+
+---
+
+### 🐳 Updating Docker Services
+
+Docker containers do **not** update automatically.  
+Updates must be done intentionally by updating image versions in the `docker-compose.yml` file.
+
+#### 1️⃣ Update image versions
+
+Edit the version tags in `docker-compose.yml`, for example:
+
+```yaml
+image: koenkk/zigbee2mqtt:1.42.0 → 1.43.1
+```
+
+---
+
+#### 2️⃣ Pull the new images
+
+```bash
+docker compose pull
+```
+
+---
+
+#### 3️⃣ Restart the services
+
+```bash
+docker compose up -d
+```
+
+This recreates containers using the new versions **without deleting persistent data**.
+
+> ⚠️ **Do NOT use `docker compose down -v`**  
+> The `-v` flag deletes volumes and may remove important data (e.g. Zigbee network, MQTT data, Home Assistant config).
+
+---
+
+#### 4️⃣ Verify services
+
+Check logs after updates:
+
+```bash
+docker compose logs -f
+```
+
+Ensure:
+
+- Home Assistant starts correctly
+- Zigbee2MQTT connects to the coordinator
+- MQTT broker is running
+- No crash loops
+
+---
+
+### 🐧 Updating the Linux System
+
+The underlying OS also requires regular updates.
+
+---
+
+#### 1️⃣ Refresh package lists
+
+```bash
+sudo apt update
+```
+
+---
+
+#### 2️⃣ Review available updates
+
+```bash
+sudo apt list --upgradable
+```
+
+This shows what will change before installing updates.
+
+---
+
+#### 3️⃣ Install updates
+
+```bash
+sudo apt upgrade
+```
+
+This updates installed packages but does not remove anything.
+
+---
+
+#### 4️⃣ Reboot (if required)
+
+If kernel, firmware, or low-level system components were updated, reboot:
+
+```bash
+sudo reboot
+```
+
+Reboots are typically required after:
+
+- Kernel updates
+- Raspberry Pi firmware updates
