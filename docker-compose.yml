@@ -21,7 +21,7 @@ services:
       - ./mosquitto/log:/mosquitto/log
 
   zigbee2mqtt:
-    image: koenkk/zigbee2mqtt:2.7.2
+    image: ghcr.io/koenkk/zigbee2mqtt:2.7.2
     container_name: zigbee2mqtt
     restart: unless-stopped
     privileged: true
@@ -34,6 +34,8 @@ services:
       - /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE3020614-if00:/dev/ttyACM0
     ports:
       - "8080:8080"
+    environment:
+      - TZ=Europe/Berlin
 
   cloudflared:
     container_name: cloudflared
