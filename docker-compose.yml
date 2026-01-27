@@ -6,8 +6,9 @@ services:
       - ./home-assistant-config:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
-    network_mode: host
     privileged: true
+    ports:
+      - "8123:8123"
 
   mosquitto:
     image: eclipse-mosquitto:2.0.22
@@ -45,3 +46,7 @@ services:
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+
+networks:
+  default:
+    name: smarthome_net
