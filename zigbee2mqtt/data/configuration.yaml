@@ -3,12 +3,12 @@ homeassistant:
 mqtt:
   server: mqtt://mosquitto:1883
 serial:
-  # We can refer to this hardcoded container device (/dev/ttyACM0) here
-  # because the actual host device (/dev/serial/by-id/...) is mounted to it
-  # in the docker-compose.yml file.
   port: /dev/ttyACM0
   adapter: deconz
 frontend:
   enabled: true
   port: 8080
 version: 4
+devices: devices.yaml
+groups: groups.yaml
+
