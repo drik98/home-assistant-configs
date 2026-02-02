@@ -20,7 +20,7 @@ You can access Home Assistant in two ways:
 2) SSH tunnel for local-only access to multiple services (e.g. Home Assistant, other frontends):
 
 ```
-ssh -L 8080:127.0.0.1:8080 -L 8123:127.0.0.1:8123 hendrik@smarthome-pi
+ssh -L 8080:127.0.0.1:8080 -L 8123:127.0.0.1:8123 -L 8482:127.0.0.1:8482 hendrik@smarthome-pi
 ```
 
 Then open the services via `localhost` in your browser (e.g. `http://localhost:8123` for Home Assistant).
@@ -31,6 +31,7 @@ The docker-compose.yml expects some environment variables to be set in order to 
 creating an `.env`-file in the root of this repository. The necessary variables are:
 
 - `CLOUDFLARE_TUNNEL_TOKEN`: The token created on cloudflare
+- `HAMH_HOME_ASSISTANT_ACCESS_TOKEN`: Long-lived access token for Home Assistant Matter Hub
 
 ## Docker IPv6 (required for Home Assistant Matter Hub)
 

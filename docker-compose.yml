@@ -38,6 +38,21 @@ services:
     environment:
       - TZ=Europe/Berlin
 
+  matter-hub:
+    image: ghcr.io/riddix/home-assistant-matter-hub:1.10.10
+    restart: unless-stopped
+    # Use host networking for mDNS/SSDP discovery; bridge mode can break Matter discovery.
+    # Context: https://github.com/t0bst4r/home-assistant-matter-hub/issues/129
+    network_mode: host
+    environment:
+      # Use localhost because the container shares the host network namespace in host mode.
+      - HAMH_HOME_ASSISTANT_URL=http://127.0.0.1:8123/
+      - HAMH_HOME_ASSISTANT_ACCESS_TOKEN=${HAMH_HOME_ASSISTANT_ACCESS_TOKEN}
+      - HAMH_LOG_LEVEL=info
+      - HAMH_HTTP_PORT=8482
+    volumes:
+      - ./home-assistant-matter-hub:/data
+
   cloudflared:
     container_name: cloudflared
     # image: ghcr.io/milgradesec/cloudflared:2025.1.1
@@ -51,4 +66,3 @@ networks:
   default:
     name: smarthome_net
     enable_ipv6: true
-
