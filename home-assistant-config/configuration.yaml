@@ -1,4 +1,3 @@
-
 # Loads default set of integrations. Do not remove.
 default_config:
 
@@ -10,9 +9,14 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-# used for the local tunnel as described in https://github.com/brenner-tobias/addon-cloudflared/blob/af397fbd4e053da4a6bdab25109eb1de4aec153e/cloudflared/DOCS.md#configurationyaml
+# Trust Docker private network for cloudflared proxy
+# Explanation:
+# - Requests from Cloudflare arrive via the cloudflared container.
+# - Inside Docker, containers communicate over the Docker bridge network.
+# - 172.16.0.0/12 covers all private Docker subnets.
+# - This ensures Home Assistant correctly sees the original client IP
+#   and avoids rejecting proxied requests.
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 10.108.0.0/16
-
+    - 172.16.0.0/12
