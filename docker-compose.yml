@@ -40,6 +40,7 @@ services:
 
   matter-hub:
     image: ghcr.io/riddix/home-assistant-matter-hub:1.10.10
+    container_name: matter-hub
     restart: unless-stopped
     # Use host networking for mDNS/SSDP discovery; bridge mode can break Matter discovery.
     # Context: https://github.com/t0bst4r/home-assistant-matter-hub/issues/129
