@@ -201,3 +201,46 @@ Reboots are typically required after:
 
 - Kernel updates
 - Raspberry Pi firmware updates
+
+## Backups to Google Drive (cron)
+
+We use `rclone` to upload a compressed backup to Google Drive.
+
+### One-time setup
+
+Install and configure rclone on the Pi:
+
+```bash
+sudo apt update
+sudo apt install -y rclone
+rclone config
+```
+
+Create a Google Drive remote (e.g. named `gdrive`) and choose a folder (e.g. `smarthome-backups`).
+
+### Backup script
+
+The script lives at `scripts/backup-to-gdrive.sh` and expects:
+
+- `rclone` configured with a remote named `gdrive`
+- Repo located at `/home/hendrik/smarthome` (override with `REPO_DIR`)
+- Backups include only git-ignored runtime data (not versioned files)
+- `.env` is intentionally excluded from backups
+
+Optional environment overrides:
+
+- `RCLONE_REMOTE` (default: `gdrive`)
+- `RCLONE_REMOTE_DIR` (default: `smarthome-backups`)
+- `STOP_STACK` (default: `1`, set to `0` for live backups)
+
+### Cron entry (weekly on Sunday at 03:00)
+
+```bash
+crontab -e
+```
+
+Add:
+
+```
+0 3 * * 0 /home/hendrik/smarthome/scripts/backup-to-gdrive.sh >/tmp/smarthome-backup.log 2>&1
+```
