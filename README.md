@@ -14,14 +14,16 @@ Note that the user here is `hendrik` and the hostname is `raspberrypi` this was 
 
 ### Connect to the services Frontends
 
-As configured in the docker-compose file we expose the ports of some services such as home-assistant.
-In order to access these frontends, run
+You can access Home Assistant in two ways:
+
+1) Preferred: `homeassistant.sieweck.de` via the Cloudflared tunnel.
+2) SSH tunnel for local-only access to multiple services (e.g. Home Assistant, other frontends):
 
 ```
 ssh -L 8080:127.0.0.1:8080 -L 8123:127.0.0.1:8123 hendrik@smarthome-pi
 ```
 
-And you can access the frontends via localhost in your browser.
+Then open the services via `localhost` in your browser (e.g. `http://localhost:8123` for Home Assistant).
 
 ## Additional Configurations
 
