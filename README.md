@@ -32,6 +32,58 @@ creating an `.env`-file in the root of this repository. The necessary variables 
 
 - `CLOUDFLARE_TUNNEL_TOKEN`: The token created on cloudflare
 
+## Docker IPv6 (required for Home Assistant Matter Hub)
+
+We had to enable IPv6 for Docker on the Raspberry Pi because it is required by the Home Assistant Matter Hub Docker setup guide:
+`https://riddix.github.io/home-assistant-matter-hub/installation/#id-2-1-docker-image`.
+
+We followed this guide to enable Docker IPv6 with propagation:
+`https://fariszr.com/docker-ipv6-setup-with-propagation/`.
+
+We generated unique local IPv6 subnets via:
+`https://simpledns.plus/private-ipv6` and chose non-overlapping prefixes for `fixed-cidr-v6`
+and the IPv6 pool.
+
+Example `/etc/docker/daemon.json` configuration on the Pi (replace with your generated ULA ranges):
+
+```json
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "fdxx:xxxx:xxxx:xxxx::/64",
+  "experimental": true,
+  "ip6tables": true,
+  "default-address-pools": [
+    { "base": "172.17.0.0/16", "size": 16 },
+    { "base": "172.18.0.0/16", "size": 16 },
+    { "base": "172.19.0.0/16", "size": 16 },
+    { "base": "172.20.0.0/14", "size": 16 },
+    { "base": "172.24.0.0/14", "size": 16 },
+    { "base": "172.28.0.0/14", "size": 16 },
+    { "base": "192.168.0.0/16", "size": 20 },
+    { "base": "fdxx:xxxx:xxxx:yyyy::/104", "size": 112 }
+  ]
+}
+```
+
+Note: When setting up a new Raspberry Pi, repeat this IPv6 configuration (and pick new subnets).
+
+Also ensure the Docker network enables IPv6 in `docker-compose.yml`:
+
+```yaml
+networks:
+  default:
+    name: smarthome_net
+    enable_ipv6: true
+```
+
+You may need to restart Docker and recreate the compose stack/network after these changes:
+
+```bash
+sudo systemctl restart docker
+docker compose down
+docker compose up -d
+```
+
 ## Update Strategy
 
 This system runs:
