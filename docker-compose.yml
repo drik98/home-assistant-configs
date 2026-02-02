@@ -50,3 +50,5 @@ services:
 networks:
   default:
     name: smarthome_net
+    enable_ipv6: true
+
