@@ -25,3 +25,7 @@ home-assistant-config/tts/
 *.db
 .DS_Store
 
+# ==== Home Assistant Matter Hub runtime ====
+/home-assistant-matter-hub/
+!/home-assistant-matter-hub/
+!/home-assistant-matter-hub/.gitkeep
