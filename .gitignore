@@ -27,5 +27,4 @@ home-assistant-config/tts/
 
 # ==== Home Assistant Matter Hub runtime ====
 /home-assistant-matter-hub/
-!/home-assistant-matter-hub/
 !/home-assistant-matter-hub/.gitkeep
