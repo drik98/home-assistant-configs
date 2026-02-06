@@ -16,11 +16,11 @@ Note that the user here is `hendrik` and the hostname is `raspberrypi` this was 
 
 You can access Home Assistant in two ways:
 
-1. Preferred: `homeassistant.sieweck.de` via the Cloudflared tunnel.
-2. SSH tunnel for local-only access to multiple services (e.g. Home Assistant, other frontends):
+1) Preferred: `homeassistant.sieweck.de` via the Cloudflared tunnel.
+2) SSH tunnel for local-only access to multiple services (e.g. Home Assistant, other frontends):
 
 ```
-ssh -L 8080:127.0.0.1:8080 -L 8123:127.0.0.1:8123 -L 8482:127.0.0.1:8482 -L 8081:127.0.0.1:8081 hendrik@smarthome-pi
+ssh -L 8080:127.0.0.1:8080 -L 8123:127.0.0.1:8123 -L 8482:127.0.0.1:8482 hendrik@smarthome-pi
 ```
 
 Then open the services via `localhost` in your browser (e.g. `http://localhost:8123` for Home Assistant).

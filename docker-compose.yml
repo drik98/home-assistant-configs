@@ -38,13 +38,6 @@ services:
     environment:
       - TZ=Europe/Berlin
 
-  mqttx:
-    image: emqx/mqttx-web:v1.13.0
-    container_name: mqttx
-    restart: unless-stopped
-    ports:
-      - "8081:80"
-
   matter-hub:
     image: ghcr.io/riddix/home-assistant-matter-hub:1.10.10
     container_name: matter-hub
